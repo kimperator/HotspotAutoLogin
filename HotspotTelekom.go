@@ -46,7 +46,7 @@ func HttpBody(r *http.Response) string {
 }
 
 func (h *HotspotTelekom) CanHandle(hotspotEnv HotspotEnv) bool {
-	ret, _ := regexp.MatchString("Telekom(_[A-Z]+)?", hotspotEnv.SSID)
+	ret, _ := regexp.MatchString("Telekom(_HDM)?", hotspotEnv.SSID)
 	return ret
 }
 
