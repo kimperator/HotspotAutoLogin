@@ -40,9 +40,14 @@ func HttpContent(client Base.HttpClient, url string) string {
 }
 
 func HttpBody(r *http.Response) string {
-	body_r, _ := ioutil.ReadAll(r.Body)
-	body := string(body_r[:len(body_r)])
-	defer r.Body.Close()
+	var body string
+	if r.Body != nil {
+		body_r, err := ioutil.ReadAll(r.Body)
+		if err == nil {
+			body = string(body_r[:len(body_r)])
+			defer r.Body.Close()
+		}
+	}
 	return body
 }
 
