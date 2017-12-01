@@ -1,15 +1,12 @@
 package Base
 
 import (
-	"fmt"
-	"os"
+	"path/filepath"
 	"testing"
 )
 
-func TestConfig(t *testing.T) {
-
-	fmt.Println(os.Getwd())
-	Cfg = loadCfg("../HotspotAutoLogin.json.example")
+func TestConfigParser(t *testing.T) {
+	Cfg = loadCfg(getConfigFilePath(filepath.Join("..", "HotspotAutoLogin.json.example")))
 	if Cfg["TELEKOM_USERNAME"] != "myuser" {
 		t.Error("unable to parse telekom username")
 	}
