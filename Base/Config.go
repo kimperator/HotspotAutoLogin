@@ -1,4 +1,4 @@
-package main
+package Base
 
 import (
 	"encoding/json"
@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 )
 
-var cfg map[string]string
+var Cfg map[string]string
 
-func loadCfg() {
+func LoadCfg() {
 	filename := "HotspotAutoLogin.json"
-	cfg = make(map[string]string)
+	Cfg = make(map[string]string)
 	var i_cfg map[string]interface{}
 
 	ex, err := os.Executable()
@@ -26,6 +26,6 @@ func loadCfg() {
 	file.Close()
 	json.Unmarshal(b, &i_cfg)
 	for itemKey, itemValue := range i_cfg {
-		cfg[itemKey] = fmt.Sprint(itemValue)
+		Cfg[itemKey] = fmt.Sprint(itemValue)
 	}
 }

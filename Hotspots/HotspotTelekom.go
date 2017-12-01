@@ -1,6 +1,7 @@
-package main
+package Hotspots
 
 import (
+	"HotspotAutoLogin/Base"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -15,7 +16,7 @@ type HotspotTelekom struct {
 	username  string
 	password  string
 	cookieJar http.CookieJar
-	client    HttpClient
+	client    Base.HttpClient
 }
 
 func NewHotspotTelekom(username string, password string) *HotspotTelekom {
@@ -26,7 +27,7 @@ func NewHotspotTelekom(username string, password string) *HotspotTelekom {
 	}
 }
 
-func HttpContent(client HttpClient, url string) string {
+func HttpContent(client Base.HttpClient, url string) string {
 	ret := ""
 	resp, err := client.Get(url)
 	if err == nil {
@@ -45,8 +46,8 @@ func HttpBody(r *http.Response) string {
 	return body
 }
 
-func (h *HotspotTelekom) CanHandle(hotspotEnv HotspotEnv) bool {
-	ret, _ := regexp.MatchString("Telekom(_HDM)?", hotspotEnv.SSID)
+func (h *HotspotTelekom) CanHandle(wifiEnv Base.WifiEnv) bool {
+	ret, _ := regexp.MatchString("Telekom(_HDM)?", wifiEnv.SSID)
 	return ret
 }
 
